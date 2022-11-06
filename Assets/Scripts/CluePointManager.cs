@@ -38,6 +38,8 @@ public class CluePointManager : MonoBehaviour
 
         AudioSource audioSource = cluePoints[clueIndex].GetComponent<AudioSource>();
         audioSource.Play();
+        Debug.Log("Clue Entered: " + clueIndex);
+        Debug.Log("Playing Audio: " + audioSource.clip.name);
 
         if (cluePoints[clueIndex].GetComponent<CluePoint>().giveKey)
         {
