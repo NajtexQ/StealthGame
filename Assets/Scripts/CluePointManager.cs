@@ -7,6 +7,8 @@ public class CluePointManager : MonoBehaviour
     public List<GameObject> cluePoints;
     public static CluePointManager instance;
 
+    private bool hasKey = false;
+
     void Awake()
     {
         instance = this;
@@ -34,11 +36,36 @@ public class CluePointManager : MonoBehaviour
     public void clueEntered(int clueIndex)
     {
 
-        cluePoints[clueIndex].GetComponent<AudioSource>().Play();
+        AudioSource audioSource = cluePoints[clueIndex].GetComponent<AudioSource>();
+        audioSource.Play();
+
+        if (cluePoints[clueIndex].GetComponent<CluePoint>().giveKey)
+        {
+            hasKey = true;
+        }
 
         if (clueIndex < cluePoints.Count - 1)
         {
             cluePoints[clueIndex + 1].SetActive(true);
         }
+        else
+        {
+            if (hasKey)
+            {
+                StartCoroutine(waitForAudio(audioSource));
+                Time.timeScale = 0;
+            }
+            else
+            {
+                AudioSource failAudio = this.GetComponent<AudioSource>();
+                failAudio.Play();
+                StartCoroutine(waitForAudio(failAudio));
+            }
+        }
+    }
+
+    IEnumerator waitForAudio(AudioSource audioSource)
+    {
+        yield return new WaitForSeconds(audioSource.clip.length);
     }
 }

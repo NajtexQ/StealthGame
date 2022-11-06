@@ -7,6 +7,7 @@ public class CluePoint : MonoBehaviour
 
     public int clueIndex;
     private bool isTriggered = false;
+    public bool giveKey = false;
 
     void OnTriggerEnter(Collider other)
     {
