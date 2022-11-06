@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class CluePoint : MonoBehaviour
 {
-    void Start()
+
+    public int clueIndex;
+    private bool isTriggered = false;
+
+    void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == "Player")
+        {
+            if (!isTriggered)
+            {
+                Debug.Log("Clue Entered");
+                CluePointManager.instance.clueEntered(clueIndex);
+                isTriggered = true;
+            }
+        }
     }
-    
-    void Update()
-    {
-        
-    }
+
 }
