@@ -6,6 +6,7 @@ public class CluePointManager : MonoBehaviour
 {
     public List<GameObject> cluePoints;
     public static CluePointManager instance;
+    public GameObject endScreen;
 
     private bool hasKey = false;
 
@@ -56,6 +57,7 @@ public class CluePointManager : MonoBehaviour
             {
                 StartCoroutine(waitForAudio(audioSource));
                 Time.timeScale = 0;
+                endScreen.SetActive(true);
             }
             else
             {
