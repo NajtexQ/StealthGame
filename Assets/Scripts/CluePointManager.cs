@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class CluePointManager : MonoBehaviour
 {
     public List<GameObject> cluePoints;
     public static CluePointManager instance;
     public GameObject endScreen;
+    public TextMeshProUGUI questText;
 
     private bool hasKey = false;
 
@@ -34,13 +37,15 @@ public class CluePointManager : MonoBehaviour
         
     }
 
-    public void clueEntered(int clueIndex)
+    public void clueEntered(int clueIndex, string newText)
     {
 
         AudioSource audioSource = cluePoints[clueIndex].GetComponent<AudioSource>();
         audioSource.Play();
         Debug.Log("Clue Entered: " + clueIndex);
         Debug.Log("Playing Audio: " + audioSource.clip.name);
+
+        notificationText.text = newText;
 
         if (cluePoints[clueIndex].GetComponent<CluePoint>().giveKey)
         {
