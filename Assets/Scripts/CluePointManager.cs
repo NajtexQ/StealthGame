@@ -45,7 +45,7 @@ public class CluePointManager : MonoBehaviour
         Debug.Log("Clue Entered: " + clueIndex);
         Debug.Log("Playing Audio: " + audioSource.clip.name);
 
-        notificationText.text = newText;
+        questText.text = newText;
 
         if (cluePoints[clueIndex].GetComponent<CluePoint>().giveKey)
         {
